@@ -10,7 +10,6 @@ import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginCategory;
-import org.processmining.models.graphbased.directed.socialnetwork.SocialNetwork;
 import org.processmining.streamconformance.soft.models.PDFA;
 import org.processmining.streamconformance.soft.models.stream.SoftConformanceStatus;
 import org.processmining.streamconformance.soft.utils.XLogHelper;
@@ -18,23 +17,18 @@ import org.processmining.streamconformance.soft.utils.XLogHelper;
 public class LogSoftConformance {
 
 	@Plugin(
-		name = "Soft Conformance - Handover of Work",
+		name = "Soft Conformance",
 		returnLabels = { "A string representation of the conformance" },
 		returnTypes = { String.class },
 		parameterLabels = {
 			"An event log",
-			"The handover of work social network"
+			"The PDFA"
 		},
-		categories = PluginCategory.Analytics,
+		categories = PluginCategory.ConformanceChecking,
 		help = "This plugin computes the conformance of a given model with respect to an event streams.",
 		userAccessible = true)
 	@UITopiaVariant(author = "A. Burattin", email = "", affiliation = "DTU")
-	public static String plugin(PluginContext context, XLog log, SocialNetwork sn) {
-		
-		// construct the model
-		PDFA model = SocialNetworkToPDFA.social2PDFA(context, sn);
-		model.setAttributeNameUsed("org:resource");
-		
+	public static String plugin(PluginContext context, XLog log, PDFA model) {
 		// compute conformance for each model
 		Map<String, SoftConformanceStatus> conformance = new HashMap<String, SoftConformanceStatus>();
 		for (XTrace t : log) {
