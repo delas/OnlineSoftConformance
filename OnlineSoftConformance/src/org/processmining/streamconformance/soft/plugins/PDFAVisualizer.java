@@ -22,11 +22,11 @@ import org.processmining.streamconformance.soft.models.PDFANode;
 public class PDFAVisualizer {
 
 	@Plugin(
-			name = "PDFA Visualizer",
-			parameterLabels = { "" },
-			returnLabels = { "" },
-			returnTypes = { JComponent.class },
-			userAccessible = true)
+		name = "PDFA Visualizer",
+		parameterLabels = { "" },
+		returnLabels = { "" },
+		returnTypes = { JComponent.class },
+		userAccessible = true)
 	@UITopiaVariant(author = "A. Burattin", email = "", affiliation = "DTU")
 	@Visualizer(name = "PDFA Visualizer")
 	public static JComponent visualize(UIPluginContext context, PDFA pdfa) {

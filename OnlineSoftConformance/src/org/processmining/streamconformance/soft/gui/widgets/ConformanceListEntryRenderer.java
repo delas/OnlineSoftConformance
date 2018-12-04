@@ -1,4 +1,4 @@
-package org.processmining.streamconformance.soft.gui.panels;
+package org.processmining.streamconformance.soft.gui.widgets;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
 
-import org.processmining.streamconformance.soft.gui.widgets.ConformanceListEntry;
 import org.processmining.streamconformance.soft.utils.GUICustomUtils;
 import org.processmining.streamconformance.soft.utils.UIColors;
 

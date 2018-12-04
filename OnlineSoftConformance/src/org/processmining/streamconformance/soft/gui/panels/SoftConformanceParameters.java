@@ -1,4 +1,4 @@
-package org.processmining.streamconformance.soft.plugins.visualizer;
+package org.processmining.streamconformance.soft.gui.panels;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

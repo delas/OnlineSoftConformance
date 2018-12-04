@@ -33,6 +33,7 @@ public class LogSoftConformance {
 		
 		// construct the model
 		PDFA model = SocialNetworkToPDFA.social2PDFA(context, sn);
+		model.setAttributeNameUsed("org:resource");
 		
 		// compute conformance for each model
 		Map<String, SoftConformanceStatus> conformance = new HashMap<String, SoftConformanceStatus>();
@@ -40,7 +41,7 @@ public class LogSoftConformance {
 			String caseId = XLogHelper.getName(t);
 			SoftConformanceStatus tracker = new SoftConformanceStatus(model, caseId);
 			for (XEvent e : t) {
-				String event = XLogHelper.getStringAttribute(e, "org:resource");
+				String event = XLogHelper.getStringAttribute(e, model.getAttributeNameUsed());
 				if (event != null) {
 					tracker.replayEvent(event);
 				}

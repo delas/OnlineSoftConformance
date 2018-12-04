@@ -13,14 +13,23 @@ import org.processmining.models.graphbased.directed.DirectedGraphElement;
 import org.processmining.models.graphbased.directed.DirectedGraphNode;
 
 @AuthoredType(
-		typeName = "Probabilistic Deterministic Finite Automata (PDFA)",
-		author = "A. Burattin",
-		email = "",
-		affiliation = "DTU")
+	typeName = "Probabilistic Deterministic Finite Automata (PDFA)",
+	author = "A. Burattin",
+	email = "",
+	affiliation = "DTU")
 public class PDFA extends AbstractDirectedGraph<PDFANode, PDFAEdge> {
 
+	private String attributeNameUsed = null;
 	private Set<PDFANode> nodes = new LinkedHashSet<PDFANode>();
 	private Set<PDFAEdge> edges = new LinkedHashSet<PDFAEdge>();
+	
+	public synchronized void setAttributeNameUsed(String attributeNameUsed) {
+		this.attributeNameUsed = attributeNameUsed;
+	}
+	
+	public synchronized String getAttributeNameUsed() {
+		return attributeNameUsed;
+	}
 	
 	public synchronized double getSeqenceProbability(String source, String target) {
 		PDFAEdge e = findEdge(source, target);
