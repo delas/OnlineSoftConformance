@@ -52,15 +52,14 @@ import org.processmining.framework.providedobjects.ProvidedObjectDeletedExceptio
 import org.processmining.framework.providedobjects.ProvidedObjectID;
 import org.processmining.framework.providedobjects.ProvidedObjectManager;
 import org.processmining.operationalsupport.xml.OSXMLConverter;
-import org.processmining.streamconformance.regions.gui.panels.ProcessInstanceDetails;
-import org.processmining.streamconformance.regions.gui.widgets.ChartVisualizer;
-import org.processmining.streamconformance.regions.gui.widgets.ConformanceListEntry;
-import org.processmining.streamconformance.regions.utils.GUICustomUtils;
-import org.processmining.streamconformance.regions.utils.UIColors;
-import org.processmining.streamconformance.regions.widgets.renderers.ConformanceListEntryRenderer;
+import org.processmining.streamconformance.soft.gui.panels.ConformanceListEntryRenderer;
+import org.processmining.streamconformance.soft.gui.widgets.ChartVisualizer;
+import org.processmining.streamconformance.soft.gui.widgets.ConformanceListEntry;
 import org.processmining.streamconformance.soft.models.stream.SoftConformanceStatus;
 import org.processmining.streamconformance.soft.models.stream.SoftConformanceTracker;
-import org.processmining.streamconformance.utils.XLogHelper;
+import org.processmining.streamconformance.soft.utils.GUICustomUtils;
+import org.processmining.streamconformance.soft.utils.UIColors;
+import org.processmining.streamconformance.soft.utils.XLogHelper;
 
 import com.fluxicon.slickerbox.components.SlickerTabbedPane;
 import com.fluxicon.slickerbox.factory.SlickerFactory;
@@ -354,29 +353,29 @@ public class OnlineSoftConformanceVisualizer extends JPanel {
 	}
 
 	protected void cleanupObjects() {
-		ProvidedObjectManager pom = context.getProvidedObjectManager();
-		List<ProvidedObjectID> allIDs = pom.getProvidedObjects();
-		Set<ProvidedObjectID> toRemove = new HashSet<ProvidedObjectID>();
-		// identify the object to be removed
-		for (ProvidedObjectID poId : allIDs) {
-			try {
-				String label = pom.getProvidedObjectLabel(poId);
-				// String type = pom.get
-				if (label.startsWith(ProcessInstanceDetails.DATA_OBJ_PREFIX)) {
-					toRemove.add(poId);
-				}
-			} catch (ProvidedObjectDeletedException e) {
-				e.printStackTrace();
-			}
-		}
-		// proceed with actual removal
-		for (ProvidedObjectID poId : toRemove) {
-			try {
-				pom.deleteProvidedObject(poId);
-			} catch (ProvidedObjectDeletedException e) {
-				// it's a tough world: there are always problems... just ignore them
-			}
-		}
+//		ProvidedObjectManager pom = context.getProvidedObjectManager();
+//		List<ProvidedObjectID> allIDs = pom.getProvidedObjects();
+//		Set<ProvidedObjectID> toRemove = new HashSet<ProvidedObjectID>();
+//		// identify the object to be removed
+//		for (ProvidedObjectID poId : allIDs) {
+//			try {
+//				String label = pom.getProvidedObjectLabel(poId);
+//				// String type = pom.get
+//				if (label.startsWith(ProcessInstanceDetails.DATA_OBJ_PREFIX)) {
+//					toRemove.add(poId);
+//				}
+//			} catch (ProvidedObjectDeletedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		// proceed with actual removal
+//		for (ProvidedObjectID poId : toRemove) {
+//			try {
+//				pom.deleteProvidedObject(poId);
+//			} catch (ProvidedObjectDeletedException e) {
+//				// it's a tough world: there are always problems... just ignore them
+//			}
+//		}
 	}
 
 	/*

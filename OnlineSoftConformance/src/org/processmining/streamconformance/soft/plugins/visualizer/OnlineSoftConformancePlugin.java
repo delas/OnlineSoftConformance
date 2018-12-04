@@ -13,7 +13,7 @@ import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginCategory;
 import org.processmining.framework.util.Pair;
 import org.processmining.models.graphbased.directed.socialnetwork.SocialNetwork;
-import org.processmining.streamconformance.regions.gui.panels.NetworkConfiguration;
+import org.processmining.streamconformance.soft.gui.panels.NetworkConfiguration;
 import org.processmining.streamconformance.soft.plugins.SocialNetworkToPDFA;
 
 public class OnlineSoftConformancePlugin {

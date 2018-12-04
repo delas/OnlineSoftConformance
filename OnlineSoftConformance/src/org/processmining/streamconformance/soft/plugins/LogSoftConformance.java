@@ -13,7 +13,7 @@ import org.processmining.framework.plugin.annotations.PluginCategory;
 import org.processmining.models.graphbased.directed.socialnetwork.SocialNetwork;
 import org.processmining.streamconformance.soft.models.PDFA;
 import org.processmining.streamconformance.soft.models.stream.SoftConformanceStatus;
-import org.processmining.streamconformance.utils.XLogHelper;
+import org.processmining.streamconformance.soft.utils.XLogHelper;
 
 public class LogSoftConformance {
 

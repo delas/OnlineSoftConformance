@@ -7,7 +7,7 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.processmining.streamconformance.regions.utils.GUICustomUtils;
+import org.processmining.streamconformance.soft.utils.GUICustomUtils;
 
 public class SoftConformanceParameters extends JPanel {
 
