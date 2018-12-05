@@ -13,7 +13,7 @@ public class Tester {
 	public static void main(String[] args) {
 		
 		PluginContext context = new CLIPluginContext(new CLIContext(), "c");
-		PDFA pdfa = Normalizer.normalize(context, PDFAVisualizer.creator(context));
+		PDFA pdfa = Normalizer.normalize(context, PDFAVisualizer.creator(context), 0.5);
 		
 		String[] strs = {
 			"ABC",

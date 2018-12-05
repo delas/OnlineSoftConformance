@@ -79,7 +79,7 @@ public class PDFAVisualizer {
 		
 		for (PDFAEdge edge : pdfa.getEdges()) {
 			DotEdge e = dot.addEdge(map.get(edge.getSource().getLabel()), map.get(edge.getTarget().getLabel()));
-			e.setLabel(String.format("%.2f", edge.getProbability()));
+			e.setLabel(String.format("%.3f", edge.getProbability()));
 			e.setOption("penwidth", Double.toString(0.5 + (edge.getProbability() * 5.0)));
 		}
 		return dot;

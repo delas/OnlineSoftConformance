@@ -9,24 +9,24 @@ import javax.swing.JTextField;
 
 import org.processmining.streamconformance.soft.utils.GUICustomUtils;
 
-public class AttributeSelection extends JPanel {
+public class RandomWalkWeightSelection extends JPanel {
 
 	private static final long serialVersionUID = -7669190410170225552L;
-	private JTextField fieldAttributeName;
+	private JTextField fieldWeight;
 
 	/**
 	 * Basic class constructor
 	 */
-	public AttributeSelection() {
+	public RandomWalkWeightSelection() {
 		initComponents();
 	}
 
-	public String getAttributeName() {
-		return fieldAttributeName.getText();
+	public double getWeight() {
+		return Double.parseDouble(fieldWeight.getText());
 	}
 
 	private void initComponents() {
-		fieldAttributeName = GUICustomUtils.prepareTextField("org:resource");
+		fieldWeight = GUICustomUtils.prepareDoubleField(0.5, 0d, 1d);
 		GridBagConstraints c = new GridBagConstraints();
 
 		setOpaque(false);
@@ -38,7 +38,7 @@ public class AttributeSelection extends JPanel {
 		c.gridwidth = 2;
 		c.insets = new Insets(0, 0, 15, 0);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		add(GUICustomUtils.prepareLabel("Use this form to configure the attribute name to use for mining."), c);
+		add(GUICustomUtils.prepareLabel("Use this form to configure the weight of the random walk."), c);
 
 		row++;
 		c = new GridBagConstraints();
@@ -46,7 +46,7 @@ public class AttributeSelection extends JPanel {
 		c.gridy = row;
 		c.anchor = GridBagConstraints.NORTH;
 		c.insets = new Insets(5, 0, 5, 0);
-		add(GUICustomUtils.prepareLabel("Attribute name to use for events:"), c);
+		add(GUICustomUtils.prepareLabel("Weight (1 means only reference; 0 only random):"), c);
 
 		c = new GridBagConstraints();
 		c.gridx = 1;
@@ -56,6 +56,6 @@ public class AttributeSelection extends JPanel {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTH;
 		c.insets = new Insets(0, 5, 5, 0);
-		add(GUICustomUtils.wrapInRoundedPanel(fieldAttributeName), c);
+		add(GUICustomUtils.wrapInRoundedPanel(fieldWeight), c);
 	}
 }

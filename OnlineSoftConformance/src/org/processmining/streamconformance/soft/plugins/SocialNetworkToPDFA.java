@@ -50,7 +50,7 @@ public class SocialNetworkToPDFA {
 			edge.setProbability(edge.getProbability() / sums.get(edge.getSource()));
 		}
 		
-		Normalizer.normalize(context, pdfa);
+		Normalizer.normalize(context, pdfa, 0.5);
 		
 		return pdfa;
 	}
