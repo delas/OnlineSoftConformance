@@ -1,4 +1,4 @@
-package org.processmining.streamconformance.soft.models.stream;
+package org.processmining.streamconformance.soft.plugins.models;
 
 import java.util.HashMap;
 import java.util.LinkedList;
