@@ -1,9 +1,16 @@
-package org.processmining.streamconformance.soft.plugins;
+package org.processmining.streamconformance.soft.plugins.visualizer;
 
+import java.awt.BorderLayout;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
@@ -29,7 +36,40 @@ public class PDFAVisualizer {
 		userAccessible = true)
 	@UITopiaVariant(author = "A. Burattin", email = "", affiliation = "DTU")
 	@Visualizer(name = "PDFA Visualizer")
-	public static JComponent visualize(UIPluginContext context, PDFA pdfa) {
+	public static JComponent visualize(UIPluginContext context, final PDFA pdfa) {
+		JPanel container = new JPanel(new BorderLayout());
+		
+		// construct the dot
+		Dot dot = getDot(pdfa);
+		final DotPanel panel = new DotPanel(dot);
+		
+		// add the slider
+		final JSlider slider = new JSlider(JSlider.VERTICAL, 0, 100, 0);
+		slider.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent event) {
+				double value = slider.getValue() / 100d;
+				PDFA newModel = pdfa.getNewCopy();
+				Set<PDFAEdge> toRemove = new HashSet<PDFAEdge>();
+				for (PDFAEdge e : newModel.getEdges()) {
+					if (e.getProbability() < value) {
+						toRemove.add(e);
+					}
+				}
+				for (PDFAEdge e : toRemove) {
+					newModel.removeEdge(e);
+				}
+				panel.changeDot(getDot(newModel), true);
+			}
+		});
+		
+		container.add(panel, BorderLayout.CENTER);
+//		container.add(slider, BorderLayout.EAST);
+		
+		return container;
+	}
+	
+	private static Dot getDot(PDFA pdfa) {
 		Dot dot = new Dot();
 		Map<String, DotNode> map = new HashMap<String, DotNode>();
 		
@@ -42,8 +82,7 @@ public class PDFAVisualizer {
 			e.setLabel(String.format("%.2f", edge.getProbability()));
 			e.setOption("penwidth", Double.toString(0.5 + (edge.getProbability() * 5.0)));
 		}
-		
-		return new DotPanel(dot);
+		return dot;
 	}
 	
 	@Plugin(

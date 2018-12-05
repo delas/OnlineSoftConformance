@@ -6,7 +6,7 @@ import org.processmining.contexts.cli.CLIPluginContext;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.streamconformance.soft.models.PDFA;
 import org.processmining.streamconformance.soft.plugins.Normalizer;
-import org.processmining.streamconformance.soft.plugins.PDFAVisualizer;
+import org.processmining.streamconformance.soft.plugins.visualizer.PDFAVisualizer;
 
 public class Tester {
 

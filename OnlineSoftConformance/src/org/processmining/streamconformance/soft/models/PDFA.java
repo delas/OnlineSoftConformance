@@ -23,6 +23,20 @@ public class PDFA extends AbstractDirectedGraph<PDFANode, PDFAEdge> {
 	private Set<PDFANode> nodes = new LinkedHashSet<PDFANode>();
 	private Set<PDFAEdge> edges = new LinkedHashSet<PDFAEdge>();
 	
+	public synchronized PDFA getNewCopy() {
+		PDFA pdfa = new PDFA();
+		pdfa.attributeNameUsed = attributeNameUsed;
+		
+		for (PDFANode n : nodes) {
+			pdfa.addNode(n.getLabel());
+		}
+		for (PDFAEdge e : edges) {
+			pdfa.addEdge(e.getSource().getLabel(), e.getTarget().getLabel(), e.getProbability());
+		}
+		
+		return pdfa;
+	}
+	
 	public synchronized void setAttributeNameUsed(String attributeNameUsed) {
 		this.attributeNameUsed = attributeNameUsed;
 	}
