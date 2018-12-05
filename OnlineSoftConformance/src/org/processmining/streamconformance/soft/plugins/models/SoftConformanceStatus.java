@@ -49,6 +49,14 @@ public class SoftConformanceStatus {
 		return mean.getResult();
 	}
 	
+	public double getSoftConformance() {
+		double mean = getMeanProbabilities();
+		double nodes = model.getNodes().size();
+		double weight = model.getWeightFactor();
+		double best = weight + ((1d / nodes) * (1d - weight));
+		return mean / best;
+	}
+	
 	public Date getLastUpdate() {
 		return new Date(lastUpdate);
 	}

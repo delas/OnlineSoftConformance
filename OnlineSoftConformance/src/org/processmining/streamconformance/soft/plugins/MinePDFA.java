@@ -46,18 +46,20 @@ public class MinePDFA {
 			String prevEvent = null;
 			for (XEvent e : t) {
 				String event = XLogHelper.getStringAttribute(e, as.getAttributeName());
-				if (pdfa.findNode(event) == null) {
-					pdfa.addNode(event);
-				}
-				if (prevEvent != null) {
-					PDFAEdge edge = pdfa.findEdge(prevEvent, event);
-					if (edge == null) {
-						pdfa.addEdge(prevEvent, event, 1);
-					} else {
-						edge.setProbability(edge.getProbability() + 1);
+				if (event != null) {
+					if (pdfa.findNode(event) == null) {
+						pdfa.addNode(event);
 					}
+					if (prevEvent != null) {
+						PDFAEdge edge = pdfa.findEdge(prevEvent, event);
+						if (edge == null) {
+							pdfa.addEdge(prevEvent, event, 1);
+						} else {
+							edge.setProbability(edge.getProbability() + 1);
+						}
+					}
+					prevEvent = event;
 				}
-				prevEvent = event;
 			}
 		}
 		

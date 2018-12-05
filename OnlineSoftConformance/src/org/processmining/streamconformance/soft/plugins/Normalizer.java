@@ -31,19 +31,10 @@ public class Normalizer {
 		return normalize(context, pdfa, rwws.getWeight());
 	}
 	
-	@Plugin(
-		name = "Normalize PDFA to include deviations",
-		returnLabels = { "A PDFA" },
-		returnTypes = { PDFA.class },
-		parameterLabels = { "A noise unaware PDFA" },
-		categories = PluginCategory.Discovery,
-		help = "This plugin is useful.",
-		userAccessible = true)
-	@UITopiaVariant(author = "A. Burattin", email = "", affiliation = "DTU")
 	public static PDFA normalize(PluginContext context, PDFA pdfa, Double alpha) {
 		
-		System.out.println(alpha);
 		PDFA newPdfa = pdfa.getNewCopy();
+		newPdfa.setWeightFactor(alpha);
 		
 		// update old connections
 		double ratio = 1d / newPdfa.getNodes().size();

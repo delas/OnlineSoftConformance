@@ -20,12 +20,14 @@ import org.processmining.models.graphbased.directed.DirectedGraphNode;
 public class PDFA extends AbstractDirectedGraph<PDFANode, PDFAEdge> {
 
 	private String attributeNameUsed = null;
+	private Double weightFactor = null;
 	private Set<PDFANode> nodes = new LinkedHashSet<PDFANode>();
 	private Set<PDFAEdge> edges = new LinkedHashSet<PDFAEdge>();
 	
 	public synchronized PDFA getNewCopy() {
 		PDFA pdfa = new PDFA();
 		pdfa.attributeNameUsed = attributeNameUsed;
+		pdfa.weightFactor = weightFactor;
 		
 		for (PDFANode n : nodes) {
 			pdfa.addNode(n.getLabel());
@@ -43,6 +45,14 @@ public class PDFA extends AbstractDirectedGraph<PDFANode, PDFAEdge> {
 	
 	public synchronized String getAttributeNameUsed() {
 		return attributeNameUsed;
+	}
+
+	public Double getWeightFactor() {
+		return weightFactor;
+	}
+
+	public void setWeightFactor(Double weightFactor) {
+		this.weightFactor = weightFactor;
 	}
 	
 	public synchronized double getSeqenceProbability(String source, String target) {

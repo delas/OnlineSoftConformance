@@ -26,7 +26,7 @@ public class RandomWalkWeightSelection extends JPanel {
 	}
 
 	private void initComponents() {
-		fieldWeight = GUICustomUtils.prepareDoubleField(0.5, 0d, 1d);
+		fieldWeight = GUICustomUtils.prepareDoubleField(0.9, 0d, 1d);
 		GridBagConstraints c = new GridBagConstraints();
 
 		setOpaque(false);
