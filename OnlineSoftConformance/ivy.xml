@@ -22,6 +22,7 @@
     	<dependency org="prom" name="PNAnalysis" rev="latest" changing="true" transitive="true" />
     	<dependency org="prom" name="TSPetrinet" rev="latest" changing="true" transitive="true" />
     	<dependency org="prom" name="SocialNetwork" rev="latest" changing="true" transitive="true" />
+    	<dependency org="prom" name="Alignment" rev="latest" changing="true" transitive="true" />
     	
     	<!-- Third party libraries. These may span multiple lines. -->
     	<!-- Please uncomment the second line in the resolve target in your build.xml file
