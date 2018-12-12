@@ -23,7 +23,7 @@ import com.fluxicon.slickerbox.factory.SlickerFactory;
 public class ConformanceListEntryRenderer<E> extends JPanel implements ListCellRenderer<E> {
 
 	private static final long serialVersionUID = -1863880605178129502L;
-	protected static SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+	protected static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	protected static NumberFormat nf = new DecimalFormat("#0.00");
 
 	private Color highlightBackground;

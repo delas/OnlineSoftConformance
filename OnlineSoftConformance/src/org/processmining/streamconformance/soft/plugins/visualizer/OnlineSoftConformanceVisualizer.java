@@ -81,7 +81,7 @@ public class OnlineSoftConformanceVisualizer extends JPanel {
 
 	private Date startTime;
 	private long eventsReceived = 0;
-//	private long errorsObserved = 0;
+	private long errorsObserved = 0;
 
 	private SlickerTabbedPane tabs = SlickerFactory.instance().createTabbedPane("Online Soft Conformance", UIColors.lightGray,
 			Color.white,
@@ -114,12 +114,12 @@ public class OnlineSoftConformanceVisualizer extends JPanel {
 
 		this.dlm = new DefaultListModel<ConformanceListEntry>();
 		this.list = new JList<ConformanceListEntry>(dlm);
-		this.list.setCellRenderer(new ConformanceListEntryRenderer<>("Mean of prob."));
+		this.list.setCellRenderer(new ConformanceListEntryRenderer<>("Soft Conformance"));
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.list.setBackground(UIColors.lightLightGray);
 
 		this.sortersAvailable = new HashMap<String, Comparator<String>>();
-		this.sortersAvailable.put("higher mean first", new Comparator<String>() {
+		this.sortersAvailable.put("low soft coformance first", new Comparator<String>() {
 			@Override
 			public int compare(String o1, String o2) {
 				SoftConformanceStatus cs1 = tracker.get(o1);
@@ -127,9 +127,9 @@ public class OnlineSoftConformanceVisualizer extends JPanel {
 				if (cs1 == null || cs2 == null) {
 					return 0;
 				}
-				if (cs1.getMeanProbabilities() > cs2.getMeanProbabilities()) {
+				if (cs1.getSoftConformance() < cs2.getSoftConformance()) {
 					return 1;
-				} else if (cs1.getMeanProbabilities() < cs2.getMeanProbabilities()) {
+				} else if (cs1.getSoftConformance() > cs2.getSoftConformance()) {
 					return -1;
 				} else {
 					return cs2.getLastUpdate().compareTo(cs1.getLastUpdate());
@@ -307,10 +307,10 @@ public class OnlineSoftConformanceVisualizer extends JPanel {
 		// add observations to the charts
 		eventsPerSecondChart.addObservation(eventsPerSecond);
 		tracesObservedChart.addObservation(tracesObserved);
-//		errorsObservedChart.addObservation(errorsObserved);
+		errorsObservedChart.addObservation(errorsObserved);
 		memoryUsedChart.addObservation(memoryUsed);
 
-//		System.out.println(new Date().toString() + "\t" + eventsPerSecond + "\t" + tracesObserved + "\t" + errorsObserved + "\t" + memoryUsed);
+		System.out.println(new Date().toString() + "\t" + eventsPerSecond + "\t" + tracesObserved + "\t" + errorsObserved + "\t" + memoryUsed);
 
 		// reset of the errors counter for this time fragment
 //		errorsObserved = 0;
@@ -334,8 +334,8 @@ public class OnlineSoftConformanceVisualizer extends JPanel {
 					if (cs != null) {
 						dlm.addElement(new ConformanceListEntry(
 								caseId,
-								(int) (100 * cs.getMeanProbabilities()),
-								1 - cs.getMeanProbabilities(),
+								(int) (100 * cs.getSoftConformance()),
+								1 - cs.getSoftConformance(),
 								cs.getLastUpdate(),
 								false,
 								null)

@@ -15,23 +15,23 @@ import org.processmining.framework.util.Pair;
 import org.processmining.models.graphbased.directed.socialnetwork.SocialNetwork;
 import org.processmining.streamconformance.soft.gui.panels.NetworkConfiguration;
 import org.processmining.streamconformance.soft.gui.panels.SoftConformanceParameters;
+import org.processmining.streamconformance.soft.models.PDFA;
 import org.processmining.streamconformance.soft.plugins.SocialNetworkToPDFA;
 
 public class OnlineSoftConformancePlugin {
 
 	@Plugin(
-		name = "Online Soft Conformance - Handover of Work",
+		name = "Online Soft Conformance",
 		returnLabels = { "A configuration for online soft conformance checker" },
 		returnTypes = { OnlineSoftConformanceConfiguration.class },
 		parameterLabels = {
-			"The handover of work social network"
+			"The PDFA model"
 		},
 		categories = PluginCategory.Analytics,
 		help = "This plugin computes the conformance of a given model with respect to an event streams.",
 		userAccessible = true)
 	@UITopiaVariant(author = "A. Burattin", email = "", affiliation = "DTU")
-	public static OnlineSoftConformanceConfiguration plugin(UIPluginContext context, SocialNetwork sn) throws UnknownHostException {
-
+	public static OnlineSoftConformanceConfiguration plugin(UIPluginContext context, PDFA model) throws UnknownHostException {
 		// prepare the configuration panels
 		NetworkConfiguration configNetwork = new NetworkConfiguration();
 		SoftConformanceParameters configConformance = new SoftConformanceParameters();
@@ -77,12 +77,27 @@ public class OnlineSoftConformancePlugin {
 		// get the final values
 		OnlineSoftConformanceConfiguration occ = new OnlineSoftConformanceConfiguration();
 
-		occ.setModel(SocialNetworkToPDFA.social2PDFA(context, sn));
+		occ.setModel(model);
 		occ.setAddress(configNetwork.getAddress());
 		occ.setPort(configNetwork.getPort());
 		occ.setNoMaxParallelInstances(configConformance.getNoMaxParallelInstances());
 		occ.setEventAttributeName(configConformance.getAttributeName());
 
 		return occ;
+	}
+	
+	@Plugin(
+		name = "Online Soft Conformance - Handover of Work",
+		returnLabels = { "A configuration for online soft conformance checker" },
+		returnTypes = { OnlineSoftConformanceConfiguration.class },
+		parameterLabels = {
+			"The handover of work social network"
+		},
+		categories = PluginCategory.Analytics,
+		help = "This plugin computes the conformance of a given model with respect to an event streams.",
+		userAccessible = true)
+	@UITopiaVariant(author = "A. Burattin", email = "", affiliation = "DTU")
+	public static OnlineSoftConformanceConfiguration plugin(UIPluginContext context, SocialNetwork sn) throws UnknownHostException {
+		return plugin(context, SocialNetworkToPDFA.social2PDFA(context, sn));
 	}
 }
