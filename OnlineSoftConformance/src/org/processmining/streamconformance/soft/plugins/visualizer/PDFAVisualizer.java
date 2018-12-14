@@ -1,6 +1,7 @@
 package org.processmining.streamconformance.soft.plugins.visualizer;
 
 import java.awt.BorderLayout;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -72,15 +73,19 @@ public class PDFAVisualizer {
 	private static Dot getDot(PDFA pdfa) {
 		Dot dot = new Dot();
 		Map<String, DotNode> map = new HashMap<String, DotNode>();
-		
+		DecimalFormat f = new DecimalFormat("#.##");
+
 		for (PDFANode node : pdfa.getNodes()) {
-			map.put(node.getLabel(), dot.addNode(node.getLabel()));
+			DotNode n = dot.addNode(node.getLabel());
+			n.setOption("fontname", "Calibri");
+			map.put(node.getLabel(), n);
 		}
 		
 		for (PDFAEdge edge : pdfa.getEdges()) {
 			DotEdge e = dot.addEdge(map.get(edge.getSource().getLabel()), map.get(edge.getTarget().getLabel()));
-			e.setLabel(String.format("%.3f", edge.getProbability()));
+			e.setLabel(f.format(edge.getProbability()));
 			e.setOption("penwidth", Double.toString(0.5 + (edge.getProbability() * 5.0)));
+			e.setOption("fontname", "Calibri");
 		}
 		return dot;
 	}
